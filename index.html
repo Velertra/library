@@ -10,10 +10,11 @@
 
   <body>
 
-  
+  <button class="open-button" onclick="openForm()">open up</button>
 
-    <!--
-    <form onsubmit  ="return setAction(this)" method="get">
+
+    <div class="pop_up_form" id="form">
+    <form onsubmit  ="return setAction(this)" class="form-container" method="get">
       <div>
         <label for="book_title">Book name thingy:</label>
         <input type="text" id="book_title" placeholder="Book Name">
@@ -32,7 +33,7 @@
        </div>
   
     </form>
-  -->
+  </div>
   
   
       <button id="display">clicker</button>
@@ -43,12 +44,15 @@
   
     <script>
   
-      /* const loopArrays = document.querySelector('#loopArrays');
-                               loopArrays.addEventListener('click', () => {
-                                 loopThruArrays()
-                               });
-   
-                               */
+      function openForm() {
+        document.getElementById("form").style.display = "block";
+      }
+     
+
+      function closeForm() {
+        document.getElementById("form").style.display = "none";
+      }
+
        
        let myLibrary = ['mock','anothermock'];
    
