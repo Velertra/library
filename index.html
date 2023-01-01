@@ -14,10 +14,10 @@
 
 
     <div class="pop_up_form" id="form">
-    <form onsubmit  ="return setAction(this)" class="form-container" method="get">
+    <form class="myform" id="myform" method="get">
       <div>
         <label for="book_title">Book name thingy:</label>
-        <input type="text" id="book_title" placeholder="Book Name">
+        <input type="text" id="book_title" name="book_title" placeholder="Book Name">
       </div>
       <div>
         <label for="book_author">guy who wrote said book name thingy:</label>
@@ -29,21 +29,19 @@
       </div>
       
       <div>  
-         <input id="submit" type="submit">
+         <input  id="submit" type="submit" >
        </div>
   
     </form>
   </div>
-  
-  
-      <button id="display">clicker</button>
     
       <div class="result" id="result"></div>
-    
-  
   
     <script>
-  
+
+let titleNeeded = ''
+      
+
       function openForm() {
         document.getElementById("form").style.display = "block";
       }
@@ -53,7 +51,26 @@
         document.getElementById("form").style.display = "none";
       }
 
-       
+
+      function validateForm(e) {
+      
+      titleNeeded = document.getElementById("book_title").value;  // pause the submit to store as
+      e.preventDefault();                                         // variable. then removes text.
+      document.getElementById('book_title').value = '';
+      addBookToLibrary(titleNeeded)
+     }
+
+ 
+     let form = document.getElementById('myform');
+     form.addEventListener('submit',validateForm);
+
+
+       const container = document.querySelector('#result')
+
+ 
+ 
+
+
        let myLibrary = ['mock','anothermock'];
    
    
@@ -64,26 +81,41 @@
    
        }
    
+
+
+      
+
    
-   
+       
+       function removeAllChildNodes(parent) {
+        while (parent.firstChild) {               //deletes divs created by 'loopThruArrays'
+          parent.removeChild(parent.firstChild);
+        }
+       };
+
        function addBookToLibrary(x) {      //adds x to myLibrary
-          this.x = myLibrary.push(x);
-           
-         
-         }
-   
-   let text = "";
-   
-         function loopThruArrays() {
-            for (let x = 0; x < myLibrary.length; x++) {
-              let bookDiv = document.createElement('div');
-              bookDiv.classList.add("resultDiv")
-              bookDiv.innerHTML = myLibrary[x];
-              result.appendChild(bookDiv);
-              
-            }                    
-          };
-   
+        this.x = myLibrary.push(x);
+         loopThruArrays()
+        }
+
+       function loopThruArrays() {
+       removeAllChildNodes(container)
+        for (let x = 0; x < myLibrary.length; x++) {
+          bookDiv = document.createElement('div');          //creates divs with each new array added to 'myLibrary'
+          bookDiv.classList.add("resultDiv")
+          bookDiv.setAttribute('id', titleNeeded)
+          bookDiv.innerHTML = myLibrary[x];
+          result.appendChild(bookDiv);
+         } 
+                               
+       };
+   /*
+       function numberDivs() {
+        for (let x = 0; x < myLibrary.length; x++)
+        bookDiv.
+       }
+
+*/
    loopThruArrays()
   
    
